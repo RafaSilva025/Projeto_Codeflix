@@ -1,12 +1,13 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
+import Header from './components/Header';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   return (
-    <div className='relative h-full overflow-hidden bg-gradient-to-b bg-black lg:h-[140vh]'>
-      {/* Header */}
+    <div className='relative h-screen overflow-hidden bg-gradient-to-b bg-black lg:h-[140vh]'>
+      <Header />
         <main className="relative pb-24 pl-4 lg:pl-16">
         <div className='flex flex-col space-y-2 py-16 md:space-y-4 lg:h-[65vh] lg:justify-end lg:pb-12'>
           <div className='absolute flex flex-col left-0 top-0 -z-10 h-[95vh] w-screen bg-black'>
