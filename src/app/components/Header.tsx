@@ -21,25 +21,26 @@ export default function Header() {
     }, []);
 
     return (
-        <header className={`
-        ${isScrolled && 'bg-black'} fixed top-0 z-50 flex w-full items-center justify-between transition-all bg-black px-4 py-4 lg:px-10 lg:py-6`}>
-            <div className="flex items-center space-x-2 md:space-x-4">
+        <header
+          className={`${isScrolled && 'bg-black'}
+          fixed top-0 z-50
+          flex w-full items-center justify-between bg-gradient-to-t from-transparent to-black p-2 px-4 transition-all lg:px-16 lg:py-4`}
+        >
+          <div className='flex items-center space-x-2 md:space-x-8'>
             <Link href='/'>
-                <Logo />
+              <Logo />
             </Link>
-            {/* <img src="Logo" alt="Netflix width={120} height={120}" /> */}
-            <ul className="hidden md:flex md:space-x-8">
-                <li>Home</li>
-                <li>TV Shows</li>
-                <li>Movies</li>
-                <li>Latest</li>
-            </ul>
-            </div>
-
-            <div className="flex items-center space-x-4">
-            <p className="hidden cursor-not-allowed lg:inline">Kids</p>
-            <img src="https://rb.gy/g1pwyx" alt="" className="cursor-pointer roudend"/>
-            </div>
-            </header>
-    )
+            <NavLinks />
+          </div>
+          <div className='flex items-center space-x-2 md:space-x-8'>
+            <SearchForm
+              onSearch={onSearch}
+              searchTerm={searchTerm}
+              onSearchTermChange={onSearchTermChange}
+            />
+            <UserProfile />
+          </div>
+        </header>
+      );
+    }
 }
