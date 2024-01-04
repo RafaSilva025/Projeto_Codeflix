@@ -2,23 +2,13 @@
 import React, { useEffect, useState } from "react";
 import { Logo } from './Logo';
 import Link from "next/link";
+import { UserProfile } from "./UserProfile";
+import { NavLinks } from "./NavLinks";
+import { useScroll } from "../hooks/useScroll";
 
 
 export default function Header() {
-    const [isScrolled, setIsScrolled] = useState(false);
-
-    useEffect (() =>{
-        const handleScroll = () => {
-            if (window.scrollY > 0) {
-                setIsScrolled(true);
-            } else {
-                setIsScrolled(false);
-            }
-        };
-    
-
-        window.addEventListener('scroll', handleScroll);
-    }, []);
+  const isScrolled = useScroll();
 
     return (
         <header
@@ -31,16 +21,8 @@ export default function Header() {
               <Logo />
             </Link>
             <NavLinks />
-          </div>
-          <div className='flex items-center space-x-2 md:space-x-8'>
-            <SearchForm
-              onSearch={onSearch}
-              searchTerm={searchTerm}
-              onSearchTermChange={onSearchTermChange}
-            />
+          </div>  
             <UserProfile />
-          </div>
         </header>
       );
-    }
 }
