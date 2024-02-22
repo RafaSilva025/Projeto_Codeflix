@@ -1,4 +1,5 @@
-import React from React; 
+import BuggyButton from "@/app/components/BuggyButton";
+import React from 'react'; 
 
 function User () {
     const { age, email, name } = await getUserInfo();
@@ -11,9 +12,13 @@ function User () {
             <p>Email:{email}</p>
             <p>Age: {age}</p>
             </div>
+
+            <div className='mt-4'>
+                <BuggyButton />
+            </div>
         </div>
     );
 }
 
 
-export default User
+export default User;
