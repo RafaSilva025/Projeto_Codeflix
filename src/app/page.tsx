@@ -1,32 +1,29 @@
-import { Banner } from './components/Banner';
-import Header from './components/Header';
-import { MovieRow } from './components/MovieRow';
-import { getFeaturedMovie, getMoviesByGenre } from './service/MovieService';
+import Header from '@/app/components/Header';
+import Player from '@/app/components/Player';
+import { getMovieById } from '@/app/service/MovieService';
+import React from 'react';
 
-export default async function Home() {
-  const featuredMovie = await getFeaturedMovie('106');
-  const genres = ['Drama', 'Action', 'Comedy', 'Animation'];
+interface IWatchProps {
+  params: {
+    id: string;
+  };
+}
 
-  const movies = await Promise.all(
-    genres.map(async (genre) => {
-      const movies = await getMoviesByGenre(genre, { _limit: 8 });
-      return { sectionTitle: genre, movies };
-    })
-  );
+export default async function Watch({ params }: IWatchProps) {
+  const movie = await getMovieById(params.id);
 
-  return (
-    <div className='relative bg-gradient-to-b pb-8'>
-      <Header />
-      <main className='relative overflow-y-scroll p-8 pb-20 scrollbar-hide lg:px-16 '>
-        <Banner movie={featuredMovie} />
-        {movies.map((movie) => (
-          <MovieRow
-            movies={movie.movies}
-            key={movie.sectionTitle}
-            sectionTitle={movie.sectionTitle}
-          />
-        ))}
-      </main>
-    </div>
-  );
+  if (!movie) {
+    return (
+      <div className='flex h-screen justify-center align-middle'>
+        <Header />
+        <main className='flex flex-1 flex-col items-center justify-center px-20 text-center'>
+          <h1 className='text-2xl font-bold md:text-4xl lg:text-7xl'>
+            Sorry, this movie is not available.
+          </h1>
+        </main>
+      </div>
+    );
+  }
+
+  return <Player movie={movie} />;
 }
