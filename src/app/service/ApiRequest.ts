@@ -18,9 +18,9 @@ export const defaultOptions: RequestOptions = {
 export function buildQueryString(params: ApiQueryParams) {
   const query = Object.entries(params)
     .filter(([, value]) => value !== undefined)
-    .map(([key, value]) => [key, String(value)]);
+    .map(([key, value]) => `${key}=${encodeURIComponent(String(value))}`);
 
-  return `?${new URLSearchParams(Object.fromEntries(query)).toString()}`;
+  return query.length > 0 ? `?${query.join('&')}` : '';
 }
 
 export async function apiRequest<T>(
